@@ -9,6 +9,8 @@ venv/
 ENV/
 env/
 
+.cursor/
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
@@ -28,9 +30,9 @@ Thumbs.db
 *.h5
 *.ckpt
 
-# Large data files (uncomment if you don't want to track processed data)
-# processed/*.csv
-# dataset/*.csv
+# Large data files
+processed/*.csv
+dataset/*.csv
 
 # Logs
 *.log

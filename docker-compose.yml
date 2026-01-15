@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  jupyter:
+    build: .
+    container_name: kbs-ids
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+      - ./dataset:/app/dataset
+      - ./processed:/app/processed
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    restart: unless-stopped

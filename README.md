@@ -1,5 +1,7 @@
 # KBS Technical Project: Intrusion Detection System Comparison
 
+**Repository:** [https://github.com/RaresMarta/KBS-technical-project](https://github.com/RaresMarta/KBS-technical-project)
+
 ## Overview
 
 This project implements and compares two deep learning approaches for Intrusion Detection Systems (IDS) using the CICIDS2017 dataset:
@@ -25,32 +27,60 @@ KBS/
 ├── 01_dataset_preprocessing.ipynb    # Dataset loading, cleaning, and splitting
 ├── 02_autoencoder_ids.ipynb          # Autoencoder-based IDS implementation
 ├── 03_transformer_ids.ipynb          # Transformer-based IDS implementation
+├── requirements.txt                   # Python dependencies
+├── Dockerfile                         # Docker image configuration
+├── docker-compose.yml                # Docker Compose configuration
+├── .dockerignore                     # Files to exclude from Docker build
 ├── dataset/                           # Raw CICIDS2017 CSV files (not in repo)
 ├── processed/                         # Preprocessed and split data (not in repo)
 │   ├── X_train.csv, X_val.csv, X_test.csv
 │   ├── y_train.csv, y_val.csv, y_test.csv
 │   └── scaler.pkl
-├── SLR.pdf                            # Systematic Literature Review
-└── report_1.pdf                        # Project report
+├── systematic_literature_review.pdf   # Systematic Literature Review
+└── theoretical_background.pdf        # Theoretical Background / Report
 ```
 
-## Requirements
+## Setup
 
-### Python Packages
+### Option 1: Docker (Recommended)
+
+The easiest way to run the experiments is using Docker:
 
 ```bash
-pip install numpy pandas scikit-learn torch matplotlib seaborn joblib jupyter
+# Build and run with docker-compose (recommended)
+docker-compose up --build
+
+# Or build and run manually
+docker build -t kbs-ids .
+docker run -p 8888:8888 -v $(pwd):/app -v $(pwd)/dataset:/app/dataset -v $(pwd)/processed:/app/processed kbs-ids
 ```
 
-Or install from requirements (if provided):
+Then open your browser to `http://localhost:8888` to access Jupyter Lab.
+
+**Note:** Make sure to download the CICIDS2017 dataset and place the CSV files in the `dataset/` directory before running the preprocessing notebook.
+
+### Option 2: Local Installation
+
+#### Requirements
+
+- Python 3.8 or higher recommended
+
+#### Python Packages
+
+Install all dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Python Version
-- Python 3.8 or higher recommended
+Or install manually:
+```bash
+pip install numpy pandas scikit-learn torch matplotlib seaborn joblib jupyter notebook ipykernel
+```
 
 ## Usage
+
+**Note:** If using Docker, the notebooks will be available in Jupyter Lab at `http://localhost:8888`. If running locally, start Jupyter with `jupyter lab` or `jupyter notebook`.
 
 ### 1. Dataset Preprocessing
 

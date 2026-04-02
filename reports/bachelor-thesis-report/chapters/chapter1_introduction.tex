@@ -1,6 +1,17 @@
-\chapter{Introducere}
+\chapter{Introduction}
+\label{chap:introduction}
 
-%\chapter*{Introducere}
-\label{intro}
+\par Intrusion Detection Systems (IDS) are a core defensive layer in modern networks, monitoring traffic to detect malicious behaviors such as denial-of-service attacks, reconnaissance scans, brute-force attempts, and data exfiltration. As the number of connected devices continues to grow --- particularly in the Internet of Things (IoT) --- the volume and diversity of network traffic have increased dramatically, exposing the limitations of traditional signature-based approaches that rely on manually maintained rule sets.
 
-\par Introducere: obiectivele lucrării și descrierea succintă a capitolelor, prezentarea temei, prezentarea contribuției proprii, respectiv a rezultatelor originale și menționarea (dacă este cazul) a sesiunii de comunicări unde a fost prezentată sau a revistei unde a fost publicată.
+\par Deep learning offers a promising alternative by learning complex, non-linear representations directly from network traffic data, enabling models to detect both known and previously unseen attack patterns. However, a gap remains between the strong benchmark results reported in the research literature and the practical deployment of such models in real-time environments.
+
+\par This thesis addresses that gap by designing, implementing, and evaluating a deep learning-based intrusion detection system capable of operating in real time. The work focuses on the CICIoT2023 dataset, a large-scale IoT intrusion detection benchmark containing over 46 million labeled network flow records across 33 attack types. Two model architectures are developed and compared: a Multi-Layer Perceptron (MLP) as the primary supervised classifier, and a Transformer-based model as an advanced comparison. Beyond offline evaluation, the thesis includes a demonstration environment in which scripted attacks are launched against a controlled web application, and the trained model classifies traffic in real time.
+
+\par The remainder of this thesis is organized as follows:
+
+\begin{itemize}
+    \item \textbf{Chapter 2} presents the theoretical background, covering intrusion detection systems, deep learning for traffic classification, and the CICIoT2023 dataset.
+    \item \textbf{Chapter 3} describes the methodology and implementation, including data preprocessing, model architectures, training procedures, and the real-time demonstration environment.
+    \item \textbf{Chapter 4} reports experimental results and discusses the findings.
+    \item \textbf{Chapter 5} concludes the thesis and outlines directions for future work.
+\end{itemize}

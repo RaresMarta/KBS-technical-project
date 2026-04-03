@@ -1,7 +1,5 @@
 # KBS Technical Project: Intrusion Detection System Comparison
 
-**Repository:** [https://github.com/RaresMarta/KBS-technical-project](https://github.com/RaresMarta/KBS-technical-project)
-
 ## Overview
 
 This project implements and compares two deep learning approaches for Intrusion Detection Systems (IDS) using the CICIDS2017 dataset:

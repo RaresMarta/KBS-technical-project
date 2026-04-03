@@ -24,6 +24,59 @@
 
 \par The trade-off is a higher false positive rate. Unusual but legitimate traffic --- such as a sudden spike in usage during a product launch, or an uncommon protocol used by a newly deployed application --- can be incorrectly flagged as malicious. The sensitivity of anomaly-based systems depends heavily on the quality of the normal behavior model and on the threshold chosen to separate normal from anomalous activity \cite{Zhang2025}.
 
+\par Figure \ref{fig:ids_pipeline} illustrates the typical architecture of a real-time deep learning-based IDS, showing the end-to-end pipeline from raw packet capture to alert generation.
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        node distance=0.8cm,
+        stage/.style={
+            rectangle,
+            rounded corners=5pt,
+            draw=black!70,
+            fill=blue!8,
+            thick,
+            minimum width=2.4cm,
+            minimum height=1.4cm,
+            text width=2.2cm,
+            align=center,
+            font=\small\bfseries
+        },
+        desc/.style={
+            font=\scriptsize,
+            text width=2.2cm,
+            align=center,
+            text=black!70
+        },
+        arrow/.style={
+            ->{Stealth[length=3mm, width=2mm]},
+            thick,
+            black!60
+        }
+    ]
+    \node[stage] (capture) {Packet\\Capture};
+    \node[stage, right=of capture] (aggregation) {Flow\\Aggregation};
+    \node[stage, right=of aggregation] (features) {Feature\\Extraction};
+    \node[stage, right=of features] (inference) {Model\\Inference};
+    \node[stage, right=of inference] (alert) {Alert /\\Response};
+
+    \node[desc, below=2pt of capture] {network interface,\\libpcap};
+    \node[desc, below=2pt of aggregation] {5-tuple grouping,\\timeouts};
+    \node[desc, below=2pt of features] {46 numerical\\features};
+    \node[desc, below=2pt of inference] {MLP / Transformer,\\StandardScaler};
+    \node[desc, below=2pt of alert] {log, dashboard,\\block};
+
+    \draw[arrow] (capture) -- (aggregation);
+    \draw[arrow] (aggregation) -- (features);
+    \draw[arrow] (features) -- (inference);
+    \draw[arrow] (inference) -- (alert);
+    \end{tikzpicture}%
+    }
+    \caption{End-to-end architecture of a real-time deep learning-based intrusion detection system.}
+    \label{fig:ids_pipeline}
+\end{figure}
+
 \par From a machine learning perspective, intrusion detection maps naturally to classification. In its simplest form, the task is binary: distinguish benign traffic from malicious flows. In practice, multi-class setups are common, with systems trained to recognize distinct categories of attacks such as DDoS, denial-of-service, reconnaissance, or botnet activity. The input is typically tabular flow data, where each flow is described by numerical features such as packet counts, byte rates, and TCP flag statistics \cite{Sharafaldin2018}.
 
 \subsection{Key Challenges}
